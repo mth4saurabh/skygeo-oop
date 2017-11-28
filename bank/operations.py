@@ -6,12 +6,12 @@ class BankAccount(object):
     def __init__(self, fullname, email, initial_balance):
         """Raise error if initial balance is insufficient"""
         if initial_balance < self.minimum_balance:
-            raise ValueError('Account requires minimum balance of ${}' \
+            raise ValueError('Account requires minimum balance of {}' \
                 .format(self.minimum_balance))
         self.fullname = fullname
         self.email = email
         self._balance = initial_balance
-        
+
     def deposit(self, amount):
         """Make a deposit, amount needs to be greater than equal to zero"""
         if amount < 0:
@@ -21,7 +21,7 @@ class BankAccount(object):
     def withdraw(self, amount):
         """Make a withdrawal, show insufficient if funds are below minimum required balance"""
         if self._balance-amount < self.minimum_balance:
-            raise ValueError('Insufficient funds, you can make maximum withdrawal of ${}' \
+            raise ValueError('Insufficient funds, you can make maximum withdrawal of {}' \
                 .format(self._balance-self.minimum_balance))
         self._balance -= amount
 
