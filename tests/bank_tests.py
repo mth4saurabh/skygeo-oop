@@ -49,6 +49,19 @@ class TestBankAccount(object):
         self.account.process_ol_transaction(110.0)
         assert self.account.balance == self.initial_balance
 
+    def test_transfer(self):
+        receiver = BankAccount("test2", "test2@test.com", 120.0)
+        self.account.transfer(receiver, 20.0)
+        assert self.account.balance == self.initial_balance-22.0
+        assert receiver.balance == 140.0
+
+    @raises(ValueError)
+    def test_invalid_transfer(self):
+        receiver = BankAccount("test2", "test2@test.com", 120.0)
+        self.account.transfer(receiver, 100.0)
+        assert self.account.balance == self.initial_balance
+        assert receiver.balance == 120.0
+
 
 class TestSavingsAccount(TestBankAccount):
 

@@ -25,6 +25,15 @@ class BankAccount(object):
                 .format(self._balance-self.minimum_balance))
         self._balance -= amount
 
+    def transfer(self, receiver, amount):
+        """Make a transfer between two accounts if sender has sufficient funds"""
+        try:
+            self.withdraw(amount+self.transaction_fee)
+            receiver.deposit(amount)
+        except Exception as e:
+            raise ValueError('Sorry, could not process the transfer. Please check your funds')
+
+
     def process_ol_transaction(self, amount):
         raise NotImplementedError('Online transaction are only allowed for current account.')
 
